@@ -1,5 +1,12 @@
 from django.shortcuts import render
 from .forms import EncounterForm
+from .serializers import EncounterSerializer
+from rest_framework import viewsets
+from .models import Encounter
+
+class EncounterViewSet(viewsets.ModelViewSet):
+    queryset = Encounter.objects.all()
+    serializer_class = EncounterSerializer
 
 def create_encounter(request):
     if request.method == 'POST':
