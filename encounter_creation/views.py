@@ -13,6 +13,8 @@ def create_encounter(request):
         form = EncounterForm(request.POST)
         if form.is_valid():
             # Process the data in form.cleaned_data
+            print("Coordinates received:", form.cleaned_data['coordinates'])
+            
             form.save()
             # Redirect to a new URL or indicate success
         print(form.fields['map'])

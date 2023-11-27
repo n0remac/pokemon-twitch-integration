@@ -1,7 +1,8 @@
 from django.db import models
 
 class Encounter(models.Model):
-    # Add more choices as per your requirement
+    coordinates = models.CharField(max_length=100, blank=True, null=True)  # Storing as a string "x,y"z
+
     MAP_CHOICES = [
         ('map1', 'Map 1'),
         ('map2', 'Map 2'),
