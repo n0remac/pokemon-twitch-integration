@@ -7,86 +7,90 @@
     <link href="{% static 'style.css' %}" rel="stylesheet">
 </head>
 <body>
-    <div style="display: flex;">
-        <!-- Image Display -->
-        <div class="image-container">
-            <img src="{% static 'images/map1.png' %}" alt="Map Image" />
-        </div>
-        <!-- Encounter Creation Form -->
-        <div class="container mt-4">
-            <div class="mb-3">
-                <h2 class="text-center">Trainer Creation</h2>
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Image Display -->
+            <div class="col-12 col-lg-8 text-center mb-3">
+                <div class="image-container">
+                    <img src="{% static 'images/map1.png' %}" alt="Map Image" class="img-fluid"/>
+                </div>
             </div>
-            <form method="post" class="row">
-                {% csrf_token %}
-        
-                <!-- Map Selection -->
-                <div class="form-group col-md-6">
-                    <label for="id_map">Select Map:</label>
-                    <select name="map" id="id_map" class="form-control">
-                        {% for map_value, map_name in form.fields.map.choices %}
-                            <option value="{{ map_value }}">{{ map_name }}</option>
-                        {% endfor %}
-                    </select>
+
+            <!-- Encounter Creation Form -->
+            <div class="col-12 col-lg-4">
+                <div class="mb-3">
+                    <h2 class="text-center">Trainer Creation</h2>
                 </div>
-        
-                <!-- Trainer Type Selection -->
-                <div class="form-group col-md-6">
-                    <label for="id_trainer_type">Trainer Type:</label>
-                    <select name="trainer_type" id="id_trainer_type" class="form-control">
-                        {% for type_value, type_name in form.fields.trainer_type.choices %}
-                            <option value="{{ type_value }}">{{ type_name }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-        
-                <!-- Trainer Name -->
-                <div class="form-group col-md-12">
-                    <label for="id_trainer_name">Trainer Name:</label>
-                    <input type="text" name="trainer_name" id="id_trainer_name" class="form-control" placeholder="Trainer Name">
-                </div>
-        
-                <!-- Encounter Dialog -->
-                <div class="form-group col-md-12">
-                    <label for="id_encounter_dialog">Encounter Dialog:</label>
-                    <textarea name="encounter_dialog" id="id_encounter_dialog" class="form-control" placeholder="Encounter Dialog"></textarea>
-                </div>
-        
-                <!-- Lose Dialog -->
-                <div class="form-group col-md-12">
-                    <label for="id_lose_dialog">Lose Dialog:</label>
-                    <textarea name="lose_dialog" id="id_lose_dialog" class="form-control" placeholder="Lose Dialog"></textarea>
-                </div>
-        
-                <!-- Pokemon Party Selection -->
-                {% for i in "123456"|make_list %}
-                <div class="form-group col-md-4">
-                    <label for="id_pokemon{{ i }}">Pokemon {{ i }}:</label>
-                    <select name="pokemon{{ i }}" id="id_pokemon{{ i }}" class="form-control">
-                        {% for pokemon_value, pokemon_name in form.fields.pokemon1.choices %}
-                            <option value="{{ pokemon_value }}">{{ pokemon_name }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                {% endfor %}
-        
-                <!-- Pokemon Level -->
-                <div class="form-group col-md-4">
-                    <label for="id_pokemon_level">Pokemon Level:</label>
-                    <input type="number" name="pokemon_level" id="id_pokemon_level" class="form-control" placeholder="Pokemon Level">
-                </div>
-        
-                <!-- Trainer Coordinates -->
-                <div class="form-group col-md-4">
-                    <label for="id_coordinates">Selected Coordinates:</label>
-                    <input type="text" name="coordinates" id="id_coordinates" class="form-control" readonly>
-                </div>
-        
-                <!-- Submit Button -->
-                <div class="form-group col-md-12">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </form>
+                <form method="post" class="row">
+                    {% csrf_token %}      
+                    <!-- Map Selection -->
+                    <div class="form-group col-md-6">
+                        <label for="id_map">Select Map:</label>
+                        <select name="map" id="id_map" class="form-control">
+                            {% for map_value, map_name in form.fields.map.choices %}
+                                <option value="{{ map_value }}">{{ map_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <!-- Trainer Type Selection -->
+                    <div class="form-group col-md-6">
+                        <label for="id_trainer_type">Trainer Type:</label>
+                        <select name="trainer_type" id="id_trainer_type" class="form-control">
+                            {% for type_value, type_name in form.fields.trainer_type.choices %}
+                                <option value="{{ type_value }}">{{ type_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <!-- Trainer Name -->
+                    <div class="form-group col-md-12">
+                        <label for="id_trainer_name">Trainer Name:</label>
+                        <input type="text" name="trainer_name" id="id_trainer_name" class="form-control" placeholder="Trainer Name">
+                    </div>
+
+                    <!-- Encounter Dialog -->
+                    <div class="form-group col-md-12">
+                        <label for="id_encounter_dialog">Encounter Dialog:</label>
+                        <textarea name="encounter_dialog" id="id_encounter_dialog" class="form-control" placeholder="Encounter Dialog"></textarea>
+                    </div>
+
+                    <!-- Lose Dialog -->
+                    <div class="form-group col-md-12">
+                        <label for="id_lose_dialog">Lose Dialog:</label>
+                        <textarea name="lose_dialog" id="id_lose_dialog" class="form-control" placeholder="Lose Dialog"></textarea>
+                    </div>
+
+                    <!-- Pokemon Party Selection -->
+                    {% for i in "123456"|make_list %}
+                    <div class="form-group col-md-4">
+                        <label for="id_pokemon{{ i }}">Pokemon {{ i }}:</label>
+                        <select name="pokemon{{ i }}" id="id_pokemon{{ i }}" class="form-control">
+                            {% for pokemon_value, pokemon_name in form.fields.pokemon1.choices %}
+                                <option value="{{ pokemon_value }}">{{ pokemon_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    {% endfor %}
+
+                    <!-- Pokemon Level -->
+                    <div class="form-group col-md-4">
+                        <label for="id_pokemon_level">Pokemon Level:</label>
+                        <input type="number" name="pokemon_level" id="id_pokemon_level" class="form-control" placeholder="Pokemon Level">
+                    </div>
+
+                    <!-- Trainer Coordinates -->
+                    <div class="form-group col-md-4">
+                        <label for="id_coordinates">Selected Coordinates:</label>
+                        <input type="text" name="coordinates" id="id_coordinates" class="form-control" readonly>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="form-group col-md-12">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
     <script src="{% static 'script.js' %}"></script>

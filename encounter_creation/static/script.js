@@ -1,9 +1,29 @@
 document.addEventListener('DOMContentLoaded', function() {
     const imageContainer = document.querySelector('.image-container');
-    const hoverBox = createBox('green'); // Box for hover
-    let selectedBox = null; // Box for the selected tile
+    const image = imageContainer.querySelector('img'); // Reference to the image
+    const hoverBox = createBox('green');
+    let selectedBox = null;
 
-    const tileSize = 48;
+    let originalTileSize = 48; // Original tile size
+    let tileSize = originalTileSize; // Current tile size
+
+    function updateTileSize() {
+        let scaleFactor = image.clientWidth / 1250; // Adjust 1250 based on the original image width
+        tileSize = originalTileSize * scaleFactor;
+
+        // Update hover box and selected box size
+        hoverBox.style.width = tileSize + 'px';
+        hoverBox.style.height = tileSize + 'px';
+        if (selectedBox) {
+            selectedBox.style.width = tileSize + 'px';
+            selectedBox.style.height = tileSize + 'px';
+        }
+    }
+
+    // Call updateTileSize initially and on window resize
+    updateTileSize();
+    window.addEventListener('resize', updateTileSize);
+
 
     function createBox(color) {
         const box = document.createElement('div');
