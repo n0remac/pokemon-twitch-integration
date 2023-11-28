@@ -1,17 +1,15 @@
 document.addEventListener('DOMContentLoaded', function() {
     const imageContainer = document.querySelector('.image-container');
-    const image = imageContainer.querySelector('img'); // Reference to the image
-    const hoverBox = createBox('green');
-    let selectedBox = null;
+    const image = imageContainer.querySelector('img'); // Ensure this is the correct reference
+    let selectedBox = null; // Box for the selected tile
 
     let originalTileSize = 48; // Original tile size
-    let tileSize = originalTileSize; // Current tile size
+    let tileSize = originalTileSize; // Initialize tileSize
 
     function updateTileSize() {
-        let scaleFactor = image.clientWidth / 1250; // Adjust 1250 based on the original image width
+        let scaleFactor = image.clientWidth / 1250; // Adjust based on the original image width
         tileSize = originalTileSize * scaleFactor;
 
-        // Update hover box and selected box size
         hoverBox.style.width = tileSize + 'px';
         hoverBox.style.height = tileSize + 'px';
         if (selectedBox) {
@@ -20,18 +18,22 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Call updateTileSize initially and on window resize
-    updateTileSize();
-    window.addEventListener('resize', updateTileSize);
-
+    // Create hoverBox after tileSize has been defined
+    const hoverBox = createBox('green'); // Box for hover
 
     function createBox(color) {
         const box = document.createElement('div');
         box.classList.add('hover-box', 'hidden');
         box.style.borderColor = color;
+        box.style.width = tileSize + 'px';   // Set initial size based on current tileSize
+        box.style.height = tileSize + 'px';
         imageContainer.appendChild(box);
         return box;
     }
+
+    // Call updateTileSize initially and on window resize
+    updateTileSize();
+    window.addEventListener('resize', updateTileSize);
 
     imageContainer.addEventListener('mousemove', function(e) {
         positionBox(e, hoverBox);
@@ -58,6 +60,9 @@ document.addEventListener('DOMContentLoaded', function() {
             selectedBox = createBox('black');
         } else {
             selectedBox.classList.remove('hidden');
+            // Ensure the size of the selected box is updated
+            selectedBox.style.width = tileSize + 'px';
+            selectedBox.style.height = tileSize + 'px';
         }
         positionBox(e, selectedBox);
 
