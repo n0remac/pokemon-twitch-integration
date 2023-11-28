@@ -2,7 +2,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Create Encounter</title>
+    <title>PokeStream</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="{% static 'style.css' %}" rel="stylesheet">
 </head>
 <body>
@@ -12,73 +13,79 @@
             <img src="{% static 'images/map1.png' %}" alt="Map Image" />
         </div>
         <!-- Encounter Creation Form -->
-        <div>
-            <form method="post">
+        <div class="container mt-4">
+            <div class="mb-3">
+                <h2 class="text-center">Trainer Creation</h2>
+            </div>
+            <form method="post" class="row">
                 {% csrf_token %}
+        
                 <!-- Map Selection -->
-                <div>
+                <div class="form-group col-md-6">
                     <label for="id_map">Select Map:</label>
-                    <select name="map" id="id_map">
+                    <select name="map" id="id_map" class="form-control">
                         {% for map_value, map_name in form.fields.map.choices %}
                             <option value="{{ map_value }}">{{ map_name }}</option>
                         {% endfor %}
                     </select>
                 </div>
-
+        
                 <!-- Trainer Type Selection -->
-                <div>
+                <div class="form-group col-md-6">
                     <label for="id_trainer_type">Trainer Type:</label>
-                    <select name="trainer_type" id="id_trainer_type">
+                    <select name="trainer_type" id="id_trainer_type" class="form-control">
                         {% for type_value, type_name in form.fields.trainer_type.choices %}
                             <option value="{{ type_value }}">{{ type_name }}</option>
                         {% endfor %}
                     </select>
                 </div>
-
+        
                 <!-- Trainer Name -->
-                <div>
+                <div class="form-group col-md-12">
                     <label for="id_trainer_name">Trainer Name:</label>
-                    <input type="text" name="trainer_name" id="id_trainer_name" placeholder="Trainer Name">
+                    <input type="text" name="trainer_name" id="id_trainer_name" class="form-control" placeholder="Trainer Name">
                 </div>
-
+        
                 <!-- Encounter Dialog -->
-                <div>
+                <div class="form-group col-md-12">
                     <label for="id_encounter_dialog">Encounter Dialog:</label>
-                    <textarea name="encounter_dialog" id="id_encounter_dialog" placeholder="Encounter Dialog"></textarea>
+                    <textarea name="encounter_dialog" id="id_encounter_dialog" class="form-control" placeholder="Encounter Dialog"></textarea>
                 </div>
-
+        
                 <!-- Lose Dialog -->
-                <div>
+                <div class="form-group col-md-12">
                     <label for="id_lose_dialog">Lose Dialog:</label>
-                    <textarea name="lose_dialog" id="id_lose_dialog" placeholder="Lose Dialog"></textarea>
+                    <textarea name="lose_dialog" id="id_lose_dialog" class="form-control" placeholder="Lose Dialog"></textarea>
                 </div>
-
+        
                 <!-- Pokemon Party Selection -->
                 {% for i in "123456"|make_list %}
-                <div>
+                <div class="form-group col-md-4">
                     <label for="id_pokemon{{ i }}">Pokemon {{ i }}:</label>
-                    <select name="pokemon{{ i }}" id="id_pokemon{{ i }}">
+                    <select name="pokemon{{ i }}" id="id_pokemon{{ i }}" class="form-control">
                         {% for pokemon_value, pokemon_name in form.fields.pokemon1.choices %}
                             <option value="{{ pokemon_value }}">{{ pokemon_name }}</option>
                         {% endfor %}
                     </select>
                 </div>
                 {% endfor %}
-
+        
                 <!-- Pokemon Level -->
-                <div>
+                <div class="form-group col-md-4">
                     <label for="id_pokemon_level">Pokemon Level:</label>
-                    <input type="number" name="pokemon_level" id="id_pokemon_level" placeholder="Pokemon Level">
+                    <input type="number" name="pokemon_level" id="id_pokemon_level" class="form-control" placeholder="Pokemon Level">
                 </div>
-                
+        
                 <!-- Trainer Coordinates -->
-                <div>
+                <div class="form-group col-md-4">
                     <label for="id_coordinates">Selected Coordinates:</label>
-                    <input type="text" name="coordinates" id="id_coordinates" readonly>
+                    <input type="text" name="coordinates" id="id_coordinates" class="form-control" readonly>
                 </div>
-                
+        
                 <!-- Submit Button -->
-                <button type="submit">Submit</button>
+                <div class="form-group col-md-12">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
             </form>
         </div>
     </div>
