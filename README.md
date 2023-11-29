@@ -35,12 +35,3 @@ Log into admin page at http://127.0.0.1:8000/admin/
 # Resources
 If you are new to Django this is a great tutorial:  
 https://tutorial.djangogirls.org/en/
-
-# Pokemon Essentials as a subtree module
-This projected uses the [Maruno17 pokemon essentials](https://github.com/Maruno17/pokemon-essentials) project as a subtree module. I have forked Maruno17's repository then added it as a subtree module to this repository. See [these docs](https://www.atlassian.com/git/tutorials/git-subtree) for more information on the git subtree command.
-
-To update from the main fork changes must first be pulled into this [this fork](https://github.com/n0remac/pokemon-essentials). Then these commands can be run from this repository:
-```bash
-git fetch git@github.com:n0remac/pokemon-essentials.git master
-git subtree pull --prefix pokemon-essentials git@github.com:n0remac/pokemon-essentials.git master --squash
-```
